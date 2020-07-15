@@ -2,3 +2,4 @@
 .DS_Store
 #build folder
 /build-mainwindow-Desktop_Qt_5_14_2_clang_64bit-Release/*
+/build-mainwindow-Desktop_Qt_5_14_2_clang_64bit-Debug/*
