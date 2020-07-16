@@ -1,7 +1,7 @@
 #ifndef FLIP_COMMAND_H
 #define FLIP_COMMAND_H
 
-#include "command.h"
+#include "common/common.h"
 #include "ViewModel/viewmodel.h"
 #include <string>
 #include <memory>

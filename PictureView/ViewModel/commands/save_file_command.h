@@ -1,6 +1,6 @@
 #ifndef SAVE_FILE_COMMAND_H
 #define SAVE_FILE_COMMAND_H
-#include "command.h"
+#include "common/common.h"
 #include <memory>
 #include <string>
 class ViewModel;

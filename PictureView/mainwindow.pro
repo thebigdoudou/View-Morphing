@@ -18,12 +18,11 @@ SOURCES += main.cpp\
     Model/model.cpp \
     ViewModel/viewmodel.cpp \
     app/app.cpp \
-    commands/command.cpp \
-    commands/open_file_command.cpp \
-    commands/rotate_command.cpp \
-    commands/save_file_command.cpp \
-    commands/show_pic_command.cpp \
-    commands/flip_command.cpp  \
+    ViewModel/commands/open_file_command.cpp \
+    ViewModel/commands/rotate_command.cpp \
+    ViewModel/commands/save_file_command.cpp \
+    ViewModel/commands/show_pic_command.cpp \
+    ViewModel/commands/flip_command.cpp  \
     view/frame.cpp \
     view/mainwindow.cpp \
     view/toolbar.cpp \
@@ -38,12 +37,11 @@ HEADERS  += view/mainwindow.h \
     ViewModel/UpdateDisplayDataNotification.h \
     ViewModel/viewmodel.h \
     app/app.h \
-    commands/command.h \
-    commands/open_file_command.h \
-    commands/rotate_command.h \
-    commands/save_file_command.h \
-    commands/show_pic_command.h \
-    commands/flip_command.h  \
+    ViewModel/commands/open_file_command.h \
+    ViewModel/commands/rotate_command.h \
+    ViewModel/commands/save_file_command.h \
+    ViewModel/commands/show_pic_command.h \
+    ViewModel/commands/flip_command.h  \
     common/common.h \
     view/UpdateViewNotification.h \
     view/frame.h \

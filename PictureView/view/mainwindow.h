@@ -1,7 +1,6 @@
 ﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "common/common.h"
-#include "commands/command.h"
 #include "toolbar.h"
 #include "about.h"
 #include "photoinfo.h"

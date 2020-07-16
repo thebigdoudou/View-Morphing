@@ -3,7 +3,6 @@
 #include "Model/model.h"
 #include "common/common.h"
 #include "UpdateDisplayDataNotification.h"
-#include "commands/command.h"
 #include "commands/open_file_command.h"
 #include "commands/flip_command.h"
 #include "commands/save_file_command.h"

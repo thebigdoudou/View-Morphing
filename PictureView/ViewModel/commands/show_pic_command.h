@@ -1,6 +1,6 @@
 #ifndef SHOW_PIC_COMMAND_H
 #define SHOW_PIC_COMMAND_H
-#include "command.h"
+#include "common/common.h"
 #include <memory>
 #include <string>
 class ViewModel;

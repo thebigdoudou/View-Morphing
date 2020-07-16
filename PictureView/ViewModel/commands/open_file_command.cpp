@@ -1,6 +1,6 @@
-#include "commands/open_file_command.h"
+#include "ViewModel/commands/open_file_command.h"
 #include "ViewModel/viewmodel.h"
-#include "command.h"
+#include "common/common.h"
 #include <QDebug>
 #include <string>
 

@@ -3,14 +3,10 @@
 #include <QImage>
 #include <QFileInfo>
 #include <memory>
-#include "commands/command.h"
 #include "common/common.h"
 
 
 class Model;
-class Notification;
-class UpdateDisplayDataNotification;
-class ViewModelNotification;
 class Command;
 
 class ViewModel
@@ -42,7 +38,6 @@ public:
     void set_update_view_notification(std::shared_ptr<Notification> notification);
 
     std::shared_ptr<Command> get_open_file_command();
-    std::shared_ptr<Command> get_filter_rem_command();
     std::shared_ptr<Command> get_show_pic_command();
     std::shared_ptr<Command> get_save_file_command();
     std::shared_ptr<Command> get_rotate_command();
