@@ -3,8 +3,8 @@
 #include <QImage>
 #include <QFileInfo>
 #include <memory>
-#include "Parameters/parameters.h"
 #include "commands/command.h"
+#include "common/common.h"
 
 class Model;
 class Notification;
@@ -50,6 +50,8 @@ public:
     std::shared_ptr<QMap<int,QFileInfo> > get_map();
 
     void notified();
+    QImage Mat2QImage(cv::Mat const& src);
+    cv::Mat QImage2Mat(QImage const& src);
 };
 
 #endif // VIEWMODEL_H

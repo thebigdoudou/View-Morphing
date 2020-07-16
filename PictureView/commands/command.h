@@ -1,6 +1,6 @@
 #ifndef COMMAND_H
 #define COMMAND_H
-#include "Parameters/parameters.h"
+#include "common/common.h"
 #include <string>
 #include <memory>
 #include "ViewModel/viewmodel.h"

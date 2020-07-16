@@ -1,7 +1,6 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <opencv2/opencv.hpp>
 #include <common/common.h>
 #include <memory>
 #include <string>
@@ -58,8 +57,6 @@ public:
 //	void reset();
     void rotate(int angle);
     void rotateID(int angle, int ID);
-    QImage Mat2QImage(cv::Mat const& src);
-    cv::Mat QImage2Mat(QImage const& src);
 };
 
 #endif // MODEL_H

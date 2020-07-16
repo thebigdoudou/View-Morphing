@@ -1,6 +1,5 @@
 #include "viewmodel.h"
 #include <QImage>
-#include "Parameters/parameters.h"
 #include "Model/model.h"
 #include "common/common.h"
 #include "Notification/notification.h"
@@ -81,9 +80,27 @@ void ViewModel::set_update_view_notification(std::shared_ptr<Notification> notif
 }
 
 void ViewModel::notified(){
-    *q_image = model->Mat2QImage(model->getImg());
+    *q_image = Mat2QImage(model->getImg());
     //std::cout<<q_PhotoMap<<std::endl;
     //std::cout<<&model->getPhotoMap()<<std::endl;
     *q_PhotoMap = model->getPhotoMap();
     update_view_notification->exec();
+}
+
+QImage ViewModel:: Mat2QImage(cv::Mat const& src)
+{
+     cv::Mat temp; // make the same cv::Mat
+     cvtColor(src, temp,cv::COLOR_BGR2RGB); // cvtColor Makes a copt, that what i need
+     QImage dest((const uchar *) temp.data, temp.cols, temp.rows, temp.step, QImage::Format_RGB888);
+     dest.bits(); // enforce deep copy, see documentation
+     // of QImage::QImage ( const uchar * data, int width, int height, Format format )
+     return dest;
+}
+
+cv::Mat ViewModel:: QImage2Mat(QImage const& src)
+{
+     cv::Mat tmp(src.height(),src.width(),CV_8UC3,(uchar*)src.bits(),src.bytesPerLine());
+     cv::Mat result; // deep copy just in case (my lack of knowledge with open cv)
+     cvtColor(tmp, result,cv::COLOR_BGR2RGB);
+     return result;
 }

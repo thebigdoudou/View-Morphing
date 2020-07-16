@@ -17,7 +17,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
     Model/model.cpp \
     Notification/notification.cpp \
-    Parameters/parameters.cpp \
     ViewModel/viewmodel.cpp \
     app/app.cpp \
     commands/command.cpp \
@@ -38,7 +37,6 @@ SOURCES += main.cpp\
 HEADERS  += view/mainwindow.h \
     Model/model.h \
     Notification/notification.h \
-    Parameters/parameters.h \
     ViewModel/viewmodel.h \
     app/app.h \
     commands/command.h \
