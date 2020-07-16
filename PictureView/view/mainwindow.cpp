@@ -1,6 +1,6 @@
 ﻿#include "view/mainwindow.h"
 #include "ui_mainwindow.h"
-#include "Notification/notification.h"
+#include "view/UpdateViewNotification.h"
 #include <QPushButton>
 #include <QWidget>
 #include <QGridLayout>

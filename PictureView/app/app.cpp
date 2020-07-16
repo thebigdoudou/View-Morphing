@@ -3,7 +3,6 @@
 #include "ViewModel/viewmodel.h"
 #include "Model/model.h"
 #include "commands/command.h"
-#include "Notification/notification.h"
 #include <memory>
 
 app::app():view(new MainWindow),model(new Model), viewmodel(new ViewModel)

@@ -16,7 +16,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     Model/model.cpp \
-    Notification/notification.cpp \
     ViewModel/viewmodel.cpp \
     app/app.cpp \
     commands/command.cpp \
@@ -36,7 +35,7 @@ SOURCES += main.cpp\
 
 HEADERS  += view/mainwindow.h \
     Model/model.h \
-    Notification/notification.h \
+    ViewModel/UpdateDisplayDataNotification.h \
     ViewModel/viewmodel.h \
     app/app.h \
     commands/command.h \
@@ -46,6 +45,7 @@ HEADERS  += view/mainwindow.h \
     commands/show_pic_command.h \
     commands/flip_command.h  \
     common/common.h \
+    view/UpdateViewNotification.h \
     view/frame.h \
     view/toolbar.h \
     view/photoinfo.h \

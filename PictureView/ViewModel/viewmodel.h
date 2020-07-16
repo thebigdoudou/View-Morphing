@@ -6,8 +6,10 @@
 #include "commands/command.h"
 #include "common/common.h"
 
+
 class Model;
 class Notification;
+class UpdateDisplayDataNotification;
 class ViewModelNotification;
 class Command;
 

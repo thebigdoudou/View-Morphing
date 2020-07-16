@@ -2,7 +2,7 @@
 #include <QImage>
 #include "Model/model.h"
 #include "common/common.h"
-#include "Notification/notification.h"
+#include "UpdateDisplayDataNotification.h"
 #include "commands/command.h"
 #include "commands/open_file_command.h"
 #include "commands/flip_command.h"

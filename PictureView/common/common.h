@@ -29,4 +29,14 @@ public:
     void setvalue(int v) { value = v; }
     int getvalue() { return value; }
 };
+
+class Notification
+{
+private:
+
+
+public:
+    Notification(){};
+    virtual void exec() = 0;
+};
 #endif // COMMON_H
