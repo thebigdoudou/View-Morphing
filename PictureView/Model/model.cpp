@@ -1,5 +1,9 @@
 #include "model.h"
 #include <opencv2/opencv.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include<opencv2/imgproc/imgproc.hpp>
+#include <opencv2/opencv.hpp>
 #include <vector>
 #include "Model/model.h"
 #include <QDebug>
@@ -61,6 +65,9 @@ void Model::show_pic(int ID){
     notify();
 }
 cv::Mat& Model::getImg(){
+    // TO FIX
+    if (CameraIsOn) return CameraFrame;
+    else
     return getListImg(CurrentID);
 }
 QMap<int,QFileInfo>& Model::getPhotoMap(){
@@ -93,8 +100,28 @@ void Model::save_fileID(std::string path, int ID){
     std::cout << ID << std::endl;
     cv::Mat &img=getListImg(ID);
     cv::imwrite(path, img);
-
 }
+void Model::StartCamera(){
+    CameraIsOn=1;
+    videoCapture_1.set(cv::CAP_PROP_FRAME_HEIGHT, 960);
+    videoCapture_1.set(cv::CAP_PROP_FRAME_WIDTH, 1280);
+    videoCapture_1.set(cv::CAP_PROP_FPS, 25.0);
+    videoCapture_1.open(0);
+    while (1) {
+        videoCapture_1 >> CameraFrame;
+        imshow("摄像头1", CameraFrame);
+        notify();
+    }
+}
+void Model::CloseCamera(){
+    videoCapture_1.release();
+    notify();
+}
+void Model::SaveCamPic(std::string Path){
+    cv::imwrite(Path, CameraFrame);
+    notify();
+}
+
 //void Model::save_bmp_file(std::string path){
 //    cv::imwrite(path, image);
 //}
@@ -115,17 +142,8 @@ void Model::rotateID(int angle, int ID)
 {
     std::cout<<angle<<ID<<std::endl;
     cv::Mat &img=getListImg(ID);
-
-//    cv:: Point2f center( (float)(img.cols/2) , (float) (img.rows/2));
-//    cv::Mat trans_mat = getRotationMatrix2D( center, angle, 1 );
-//    float radian = (float) (angle /180.0 * CV_PI);
-//    float sinVal = abs(sin(radian));
-//    float cosVal = abs(cos(radian));
-//    cv::Size targetSize(img.rows, img.cols);
-//    warpAffine(img, img, trans_mat, targetSize);
-     cv::transpose(img, img);
-     cv::flip(img, img, angle);
-    //setListImg(ID, img);
+    cv::transpose(img, img);
+    cv::flip(img, img, angle);
     notify();
 }
 

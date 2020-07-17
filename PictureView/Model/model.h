@@ -20,6 +20,9 @@ private:
     QStringList FileFilter;
     std::list<cv::Mat> images;
     QMap<int, QFileInfo> PhotoMap;
+    cv::Mat CameraFrame;
+    bool CameraIsOn;
+    cv::VideoCapture videoCapture_1;
     std::shared_ptr<Notification> update_display_data_notification;
     void read_img(std::string path);
 public:
@@ -57,6 +60,9 @@ public:
 //	void reset();
     void rotate(int angle);
     void rotateID(int angle, int ID);
+    void StartCamera();//开启摄像头
+    void CloseCamera(); //关闭摄像头
+    void SaveCamPic(std::string path);
 };
 
 #endif // MODEL_H

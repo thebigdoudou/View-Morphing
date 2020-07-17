@@ -36,6 +36,9 @@ public:
     void open_file_command(std::shared_ptr<Command>);
     void show_pic_command(std::shared_ptr<Command>);
     void save_file_command(std::shared_ptr<Command>);
+    void start_camera_command(std::shared_ptr<Command>);
+    void close_camera_command(std::shared_ptr<Command>);
+    void save_camera_frame_command(std::shared_ptr<Command>);
     void del_pic_command(std::shared_ptr<Command>);
     void flip_command(std::shared_ptr<Command>);
     void rotate_command(std::shared_ptr<Command>);
@@ -93,7 +96,9 @@ private:
     std::shared_ptr<Command> set_del_pic_command;
     std::shared_ptr<Command> set_flip_command;
     std::shared_ptr<Command> set_rotate_command;
-
+    std::shared_ptr<Command> set_start_camera_command;
+    std::shared_ptr<Command> set_close_camera_command;
+    std::shared_ptr<Command> set_save_camera_frame_command;
     std::shared_ptr<Notification> update_view_notification;
 
     Ui::MainWindow *ui;

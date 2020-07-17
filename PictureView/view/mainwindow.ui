@@ -23,7 +23,7 @@
    <string>PhotoView</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../mainwindow.qrc">
     <normaloff>:/images/icon.png</normaloff>:/images/icon.png</iconset>
   </property>
   <property name="iconSize">
@@ -85,7 +85,7 @@
       <string>Slide Show</string>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="../mainwindow.qrc">
        <normaloff>:/images/play.png</normaloff>:/images/play.png</iconset>
      </property>
      <addaction name="actionEffect1"/>
@@ -111,7 +111,7 @@
   </widget>
   <action name="actionOpen">
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/open.png</normaloff>:/images/open.png</iconset>
    </property>
    <property name="text">
@@ -120,7 +120,7 @@
   </action>
   <action name="actionSave">
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/save.png</normaloff>:/images/save.png</iconset>
    </property>
    <property name="text">
@@ -132,7 +132,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/saveas.png</normaloff>:/images/saveas.png</iconset>
    </property>
    <property name="text">
@@ -141,7 +141,7 @@
   </action>
   <action name="actionPrint">
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/print.png</normaloff>:/images/print.png</iconset>
    </property>
    <property name="text">
@@ -150,7 +150,7 @@
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/exit.png</normaloff>:/images/exit.png</iconset>
    </property>
    <property name="text">
@@ -159,7 +159,7 @@
   </action>
   <action name="actionResize">
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/resize.png</normaloff>:/images/resize.png</iconset>
    </property>
    <property name="text">
@@ -168,7 +168,7 @@
   </action>
   <action name="actionFlipH">
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/fliphorizontal.png</normaloff>:/images/fliphorizontal.png</iconset>
    </property>
    <property name="text">
@@ -177,7 +177,7 @@
   </action>
   <action name="actionFlipV">
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/flipvertical.png</normaloff>:/images/flipvertical.png</iconset>
    </property>
    <property name="text">
@@ -186,7 +186,7 @@
   </action>
   <action name="actionHomePage">
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/home.png</normaloff>:/images/home.png</iconset>
    </property>
    <property name="text">
@@ -195,7 +195,7 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset>
+    <iconset resource="../mainwindow.qrc">
      <normaloff>:/images/about.png</normaloff>:/images/about.png</iconset>
    </property>
    <property name="text">
@@ -272,6 +272,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../mainwindow.qrc"/>
+ </resources>
  <connections/>
 </ui>

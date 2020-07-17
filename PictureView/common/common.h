@@ -3,7 +3,6 @@
 #include <opencv2/opencv.hpp>
 #include <memory>
 #include <string>
-
 class Parameters
 {
 public:

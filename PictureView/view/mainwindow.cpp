@@ -639,7 +639,15 @@ void MainWindow::show_pic_command(std::shared_ptr<Command> command){
 void MainWindow::save_file_command(std::shared_ptr<Command> command){
     set_save_file_command = command;
 }
-
+void MainWindow::start_camera_command(std::shared_ptr<Command> command){
+    set_start_camera_command = command;
+}
+void MainWindow::close_camera_command(std::shared_ptr<Command> command){
+    set_close_camera_command = command;
+}
+void MainWindow::save_camera_frame_command(std::shared_ptr<Command> command){
+    set_save_camera_frame_command = command;
+}
 void MainWindow::del_pic_command(std::shared_ptr<Command> command){
     set_del_pic_command = command;
 }
