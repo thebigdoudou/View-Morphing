@@ -109,7 +109,7 @@ void Model::StartCamera(){
     videoCapture_1.open(0);
     while (1) {
         videoCapture_1 >> CameraFrame;
-        imshow("摄像头1", CameraFrame);
+        imshow("Camera1", CameraFrame);
         notify();
     }
 }

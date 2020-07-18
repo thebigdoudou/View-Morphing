@@ -44,6 +44,7 @@ public:
                                   "*.icns");
         CntNum=0;
         CurrentID=-1;
+        CameraIsOn=0;
     }
     void set_update_display_data_notification(std::shared_ptr<Notification> notification);
     void open_file(std::string path);
