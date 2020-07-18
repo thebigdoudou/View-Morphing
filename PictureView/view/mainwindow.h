@@ -77,6 +77,7 @@ private slots:
     void hideMirrorView();
     void hideSlideShow();
     void photoNeeded(int index);
+    void OpenCamera();
 
     void on_actionHomePage_triggered();
     void on_actionAbout_triggered();
@@ -105,7 +106,6 @@ private:
 
     Ui::MainWindow *ui;
     ToolBar *toolBar;
-    Frame *f1;
 
     MirrorView* mirrorView;
     SlideShow* slideShow;
@@ -116,6 +116,7 @@ private:
     bool ZoomFactorFlag;
     qreal ZoomFactor;
     bool PhotoExist;
+    bool CameraFlag;
     int PhotoIndex;
     QTimer *timer;
 };

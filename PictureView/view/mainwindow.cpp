@@ -40,7 +40,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    f1=new Frame;
     toolBar = new ToolBar();
     update_view_notification = std::static_pointer_cast<Notification, UpdateViewNotification>(std::shared_ptr<UpdateViewNotification>(new UpdateViewNotification(std::shared_ptr<MainWindow>(this))));
     ui->statusBar->addPermanentWidget(toolBar,1);
@@ -64,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(toolBar->Info,SIGNAL(clicked()),this,SLOT(Info()));
     connect(toolBar->Play,SIGNAL(clicked()),this,SLOT(Play()));
     connect(toolBar->Delete,SIGNAL(clicked()),this,SLOT(Delete()));
+    connect(toolBar->camera,SIGNAL(clicked()),this,SLOT(OpenCamera()));
 
 
     PhotoIndex = 0;
@@ -72,6 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     RotateFlipFlag = false;
     ZoomFactor = 1.0;
     ZoomFactorFlag = true;
+    CameraFlag = 0;
 }
 
 MainWindow::~MainWindow()
@@ -311,15 +312,34 @@ void MainWindow::resizeEvent (QResizeEvent *)
     }
 }
 
+void MainWindow::OpenCamera(){
+    if(CameraFlag==0){
+        timer->start(20);//启动计时器
+        set_start_camera_command->exec();
+        CameraFlag=1;
+    }
+    else{
+        set_close_camera_command->exec();
+        CameraFlag=0;
+        timer->stop();
+    }
+}
+
 void MainWindow::FullScreen()
 {
-    timer->start(20);//启动计时器
-    set_start_camera_command->exec();
-
-//    if(PhotoExist)
-//    {
-//        f1->show();
-//    }
+    if(CameraFlag)
+    {
+        auto path = GetFileInfo().path();
+        auto file_name = QFileDialog::getSaveFileName(this, tr("打开文件"), path,
+                                                      tr("image(*.png *.jpg *.bmp *.tiff);;AllFile(*)"));
+        if(file_name.isEmpty()){
+            QMessageBox::information(this, tr("Failed to Open this!"), tr("OK"));
+            return;
+        }
+        qInfo() << file_name;
+        set_save_camera_frame_command->set_parameters(std::static_pointer_cast<Parameters, PathParameters>(std::shared_ptr<PathParameters>(new PathParameters(file_name.toStdString()))));
+        set_save_camera_frame_command->exec();
+    }
 }
 
 
@@ -476,35 +496,6 @@ void MainWindow::on_actionSave_triggered()
         qInfo() << file_name;
         set_save_file_command->set_parameters(std::static_pointer_cast<Parameters, PathParameters>(std::shared_ptr<PathParameters>(new PathParameters(file_name.toStdString()))));
         set_save_file_command->exec();
-
-//        QFileInfo SaveFile = (*PhotoMap)[PhotoIndex];
-
-//        if(SaveFile.suffix() == "png" || SaveFile.suffix() == "PNG" || SaveFile.suffix() == "jpg"
-//                || SaveFile.suffix() == "JPG" || SaveFile.suffix() == "jpeg" || SaveFile.suffix() == "JPEG"
-//                || SaveFile.suffix() == "bmp" || SaveFile.suffix() == "BMP" || SaveFile.suffix() == "tif"
-//                || SaveFile.suffix() == "tiff" || SaveFile.suffix() == "TIF" || SaveFile.suffix() == "TIFF"
-//                || SaveFile.suffix() == "webp" || SaveFile.suffix() == "WEBP" || SaveFile.suffix() == "jp2"
-//                || SaveFile.suffix() == "JP2" || SaveFile.suffix() == "dds" || SaveFile.suffix() == "DDS"
-//                || SaveFile.suffix() == "ppm" || SaveFile.suffix() == "PPM" || SaveFile.suffix() == "xpm"
-//                || SaveFile.suffix() == "XPM" || SaveFile.suffix() == "pgm" || SaveFile.suffix() == "PGM"
-//                || SaveFile.suffix() == "xbm" || SaveFile.suffix() == "XBM" || SaveFile.suffix() == "pbm"
-//                || SaveFile.suffix() == "PBM")
-//        {
-//            if(QFile(SaveFile.absoluteFilePath()).open(QIODevice::ReadWrite))
-//            {
-//                (*q_image).save(SaveFile.absoluteFilePath());
-//            }
-//            else
-//            {
-//                QMessageBox msg(this);
-//                msg.setIcon(QMessageBox::Critical);
-//                msg.setWindowTitle(tr("Error"));
-//                msg.setText(tr("Can't Write File"));
-//                msg.setStandardButtons(QMessageBox::Ok);
-//                msg.setButtonText(QMessageBox::Ok, tr("OK"));
-//                msg.exec();
-//            }
-//        }
     }
 }
 

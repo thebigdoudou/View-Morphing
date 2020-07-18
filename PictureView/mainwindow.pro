@@ -26,7 +26,6 @@ SOURCES += main.cpp\
     ViewModel/commands/save_file_command.cpp \
     ViewModel/commands/show_pic_command.cpp \
     ViewModel/commands/flip_command.cpp  \
-    view/frame.cpp \
     view/mainwindow.cpp \
     view/toolbar.cpp \
     view/photoinfo.cpp \
@@ -51,7 +50,6 @@ HEADERS  += view/mainwindow.h \
     ViewModel/commands/flip_command.h  \
     common/common.h \
     view/UpdateViewNotification.h \
-    view/frame.h \
     view/toolbar.h \
     view/photoinfo.h \
     view/about.h \
@@ -60,7 +58,6 @@ HEADERS  += view/mainwindow.h \
     view/slideshow.h
 
 FORMS    += view/mainwindow.ui \
-    view/frame.ui \
     view/photoinfo.ui \
     view/about.ui \
     view/mirrorview.ui \

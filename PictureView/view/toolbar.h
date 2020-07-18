@@ -26,8 +26,8 @@ public:
     QPushButton *FlipH;
     QPushButton *FlipV;
     QPushButton *Play;
-    QPushButton *Morph;
     QPushButton *Resize;
+    QPushButton *camera;
     QLabel *label;
 };
 

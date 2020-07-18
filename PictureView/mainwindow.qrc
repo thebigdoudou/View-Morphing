@@ -33,5 +33,6 @@
         <file>images/blue.css</file>
         <file>images/gray.css</file>
         <file>images/white.css</file>
+        <file>images/camera.png</file>
     </qresource>
 </RCC>

@@ -18,6 +18,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     FlipV = new QPushButton(this);
     Play = new QPushButton(this);
     Info = new QPushButton(this);
+    camera = new QPushButton(this);
 
     ZoomIn->setObjectName("ZoomIn");
     ZoomOut->setObjectName("ZoomOut");
@@ -32,6 +33,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     FlipV->setObjectName("FlipV");
     FlipH->setObjectName("FlipH");
     Play->setObjectName("Play");
+    camera->setObjectName("Carema");
     //Resize = new QPushButton(this);
 
     ZoomIn->setIcon(QIcon(":/images/zoomin.png"));
@@ -47,6 +49,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     FlipV->setIcon(QIcon(":/images/flipvertical.png"));
     FlipH->setIcon(QIcon(":/images/fliphorizontal.png"));
     Play->setIcon(QIcon(":/images/play.png"));
+    camera->setIcon(QIcon(":/images/camera.png"));
     //Resize->setIcon(QIcon(":/images/resize.png"));
 
     ZoomIn->setToolTip(tr("Zoom In"));
@@ -62,6 +65,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     FlipV->setToolTip(tr("Flip Vertical"));
     FlipH->setToolTip(tr("Flip Horizontal"));
     Play->setToolTip(tr("Play"));
+    camera->setToolTip(tr("Camera"));
 
     label = new QLabel;
     label->setObjectName("label");
@@ -72,30 +76,31 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     labelLayout->setContentsMargins(0,0,0,0);
 
     QHBoxLayout *mainLayout = new QHBoxLayout;
-    mainLayout->addStretch();
-    mainLayout->addWidget(ZoomIn);
-    mainLayout->addWidget(ZoomOut);
-    mainLayout->addWidget(ZoomFit);
-    mainLayout->addWidget(Prev);
-    mainLayout->addWidget(Next);
-    mainLayout->addWidget(RotateLeft);
-    mainLayout->addWidget(RotateRight);
-    mainLayout->addWidget(FlipH);
-    mainLayout->addWidget(FlipV);
-    mainLayout->addWidget(FullScreen);
+    mainLayout->addStretch(28);
+    mainLayout->addWidget(ZoomIn,4);
+    mainLayout->addWidget(ZoomOut,4);
+    mainLayout->addWidget(ZoomFit,4);
+    mainLayout->addWidget(Prev,4);
+    mainLayout->addWidget(Next,4);
+    mainLayout->addWidget(RotateLeft,4);
+    mainLayout->addWidget(RotateRight,4);
+    mainLayout->addWidget(FlipH,4);
+    mainLayout->addWidget(FlipV,4);
     //mainLayout->addWidget(Resize);
-    mainLayout->addWidget(Play);
-    mainLayout->addWidget(Info);
-    mainLayout->addWidget(Delete);
-    mainLayout->addStretch();
+    mainLayout->addWidget(Play,4);
+    mainLayout->addWidget(Info,4);
+    mainLayout->addWidget(Delete,4);
+    mainLayout->addWidget(camera,4);
+    mainLayout->addWidget(FullScreen,4);
+    mainLayout->addStretch(28);
     mainLayout->setContentsMargins(0,0,0,0);
-    mainLayout->setSpacing(1);
+    mainLayout->setSpacing(3);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addLayout(labelLayout);
     layout->addLayout(mainLayout);
     layout->setContentsMargins(0,0,0,0);
-    layout->setSpacing(3);
+    layout->setSpacing(2);
     setWindowFlags(Qt::FramelessWindowHint);
 }
 

@@ -16,7 +16,7 @@ QPushButton:pressed{
 	background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #454648, stop:1 #7A7A7A);
 }
 
-QPushButton#ZoomIn,QPushButton#ZoomOut,QPushButton#ZoomFit,QPushButton#FullScreen,QPushButton#Prev,QPushButton#Next,QPushButton#RotateLeft,QPushButton#RotateRight,QPushButton#Delete,QPushButton#Info,QPushButton#FlipV,QPushButton#FlipH,QPushButton#Play{
+QPushButton#camera,QPushButton#ZoomIn,QPushButton#ZoomOut,QPushButton#ZoomFit,QPushButton#FullScreen,QPushButton#Prev,QPushButton#Next,QPushButton#RotateLeft,QPushButton#RotateRight,QPushButton#Delete,QPushButton#Info,QPushButton#FlipV,QPushButton#FlipH,QPushButton#Play{
 	border-style: none;
 	border: 1;
 	color: #F0F0F0;
@@ -27,11 +27,11 @@ QPushButton#ZoomIn,QPushButton#ZoomOut,QPushButton#ZoomFit,QPushButton#FullScree
 	background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #B8B8B8, stop:1 #D6D6D6); 
 }
 
-QPushButton#ZoomIn:hover,QPushButton#ZoomOut:hover,QPushButton#ZoomFit:hover,QPushButton#FullScreen:hover,QPushButton#Prev:hover,QPushButton#Next:hover,QPushButton#RotateLeft:hover,QPushButton#RotateRight:hover,QPushButton#Delete:hover,QPushButton#Info:hover,QPushButton#FlipV:hover,QPushButton#FlipH:hover,QPushButton#Play:hover{ 
+QPushButton#camera:hover,QPushButton#ZoomIn:hover,QPushButton#ZoomOut:hover,QPushButton#ZoomFit:hover,QPushButton#FullScreen:hover,QPushButton#Prev:hover,QPushButton#Next:hover,QPushButton#RotateLeft:hover,QPushButton#RotateRight:hover,QPushButton#Delete:hover,QPushButton#Info:hover,QPushButton#FlipV:hover,QPushButton#FlipH:hover,QPushButton#Play:hover{
 	background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #636363, stop:1 #5C5C5C);
 }
 
-QPushButton#ZoomIn:pressed,QPushButton#ZoomOut:pressed,QPushButton#ZoomFit:pressed,QPushButton#FullScreen:pressed,QPushButton#Prev:pressed,QPushButton#Next:pressed,QPushButton#RotateLeft:pressed,QPushButton#RotateRight:pressed,QPushButton#Delete:pressed,QPushButton#Info:pressed,QPushButton#FlipV:pressed,QPushButton#FlipH:pressed,QPushButton#Play:pressed{ 
+QPushButton#camera:pressed,QPushButton#ZoomIn:pressed,QPushButton#ZoomOut:pressed,QPushButton#ZoomFit:pressed,QPushButton#FullScreen:pressed,QPushButton#Prev:pressed,QPushButton#Next:pressed,QPushButton#RotateLeft:pressed,QPushButton#RotateRight:pressed,QPushButton#Delete:pressed,QPushButton#Info:pressed,QPushButton#FlipV:pressed,QPushButton#FlipH:pressed,QPushButton#Play:pressed{
 	background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #B8B8B8, stop:1 #D6D6D6);
 }
 
