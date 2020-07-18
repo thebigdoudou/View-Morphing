@@ -18,6 +18,7 @@ app::app():view(new MainWindow),model(new Model), viewmodel(new ViewModel)
     view->start_camera_command(viewmodel->get_start_camera_command());
     view->close_camera_command(viewmodel->get_close_camera_command());
     view->save_camera_frame_command(viewmodel->get_save_camera_frame_command());
+    view->update_camera_frame_command(viewmodel->get_update_camera_frame_command());
     view->save_file_command(viewmodel->get_save_file_command());
     view->rotate_command(viewmodel->get_rotate_command());
     view->flip_command(viewmodel->get_flip_command());

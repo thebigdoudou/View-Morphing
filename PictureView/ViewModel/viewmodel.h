@@ -24,7 +24,7 @@ private:
     std::shared_ptr<Command> start_camera_command;
     std::shared_ptr<Command> close_camera_command;
     std::shared_ptr<Command> save_camera_frame_command;
-
+    std::shared_ptr<Command> update_camera_frame_command;
 
     std::shared_ptr<Notification> update_display_data_notification;
     std::shared_ptr<Notification> update_view_notification;
@@ -40,7 +40,7 @@ public:
     void exec_close_camera_command();
     void exec_start_camera_command();
     void exec_save_camera_frame_command(std::string path);
-
+    void exec_update_camera_frame_command();
     void set_update_view_notification(std::shared_ptr<Notification> notification);
 
     std::shared_ptr<Command> get_open_file_command();
@@ -48,6 +48,7 @@ public:
     std::shared_ptr<Command> get_start_camera_command();
     std::shared_ptr<Command> get_close_camera_command();
     std::shared_ptr<Command> get_save_camera_frame_command();
+    std::shared_ptr<Command> get_update_camera_frame_command();
     std::shared_ptr<Command> get_save_file_command();
     std::shared_ptr<Command> get_rotate_command();
     std::shared_ptr<Command> get_flip_command();

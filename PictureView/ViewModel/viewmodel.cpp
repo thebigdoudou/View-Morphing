@@ -11,6 +11,7 @@
 #include "commands/start_camera_command.h"
 #include "commands/close_camera_command.h"
 #include "commands/save_camera_frame_command.h"
+#include "commands/update_camera_frame_command.h"
 #include <QDebug>
 ViewModel::ViewModel():q_image(new QImage),q_PhotoMap(new QMap<int, QFileInfo>){
 
@@ -19,6 +20,7 @@ ViewModel::ViewModel():q_image(new QImage),q_PhotoMap(new QMap<int, QFileInfo>){
     start_camera_command = std::static_pointer_cast<Command, StartCameraCommand>(std::shared_ptr<StartCameraCommand> (new StartCameraCommand(std::shared_ptr<ViewModel>(this))));
     close_camera_command = std::static_pointer_cast<Command, CloseCameraCommand>(std::shared_ptr<CloseCameraCommand> (new CloseCameraCommand(std::shared_ptr<ViewModel>(this))));
     save_camera_frame_command = std::static_pointer_cast<Command, SaveCamFrame>(std::shared_ptr<SaveCamFrame> (new SaveCamFrame(std::shared_ptr<ViewModel>(this))));
+    update_camera_frame_command = std::static_pointer_cast<Command, UpdateCamFrame>(std::shared_ptr<UpdateCamFrame> (new UpdateCamFrame(std::shared_ptr<ViewModel>(this))));
     open_file_command = std::static_pointer_cast<Command, OpenFileCommand>(std::shared_ptr<OpenFileCommand> (new OpenFileCommand(std::shared_ptr<ViewModel>(this))));
     //reset_command = std::static_pointer_cast<Command, ResetCommand>(std::shared_ptr<ResetCommand>(new ResetCommand(std::shared_ptr<ViewModel>(this))));
     flip_command = std::static_pointer_cast<Command, FlipCommand>(std::shared_ptr<FlipCommand>(new FlipCommand(std::shared_ptr<ViewModel>(this))));
@@ -31,6 +33,9 @@ ViewModel::ViewModel():q_image(new QImage),q_PhotoMap(new QMap<int, QFileInfo>){
 
 void ViewModel::exec_open_file_command(std::string path){
     model->open_file(path);
+}
+void ViewModel::exec_update_camera_frame_command(){
+    model->UpdateCamFrame();
 }
 void ViewModel::exec_start_camera_command(){
     model->StartCamera();
@@ -63,6 +68,9 @@ void ViewModel::bind(std::shared_ptr<Model> model){
 
 std::shared_ptr<Command> ViewModel::get_save_file_command(){
     return save_file_command;
+}
+std::shared_ptr<Command> ViewModel::get_update_camera_frame_command(){
+    return update_camera_frame_command;
 }
 std::shared_ptr<Command> ViewModel::get_start_camera_command(){
     return start_camera_command;

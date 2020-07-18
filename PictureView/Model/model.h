@@ -7,9 +7,14 @@
 #include <list>
 #include <QFileInfo>
 #include <QMap>
+#include <QCamera>
+#include <QCameraViewfinder>
+#include <QCameraImageCapture>
 class ViewModel;
 class Notification;
-
+class QCamera;
+class QCameraViewfinder;
+class QCameraImageCapture;
 class Model
 {
 private:
@@ -20,13 +25,19 @@ private:
     QStringList FileFilter;
     std::list<cv::Mat> images;
     QMap<int, QFileInfo> PhotoMap;
-    cv::Mat CameraFrame;
     bool CameraIsOn;
+//    QCamera *camera;
+//    QCameraViewfinder *viewfinder;
+//    QCameraImageCapture *imageCapture;
+    cv::Mat CameraFrame;
     cv::VideoCapture videoCapture_1;
     std::shared_ptr<Notification> update_display_data_notification;
     void read_img(std::string path);
 public:
     Model(){
+//        camera=new QCamera;
+//        viewfinder=new QCameraViewfinder;
+//        imageCapture=new QCameraImageCapture(camera);
         FileSuffix = (QStringList() << "png" <<
                                   "jpg" << "jpeg" << "bmp" <<
                                   "tif" << "tiff" << "webp" <<
@@ -63,6 +74,7 @@ public:
     void rotateID(int angle, int ID);
     void StartCamera();//开启摄像头
     void CloseCamera(); //关闭摄像头
+    void UpdateCamFrame();
     void SaveCamPic(std::string path);
 };
 

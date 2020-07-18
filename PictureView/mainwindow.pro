@@ -1,7 +1,6 @@
 QT       += core gui
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
+QT+=multimediawidgets
 CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
@@ -19,6 +18,7 @@ SOURCES += main.cpp\
     ViewModel/commands/close_camera_command.cpp \
     ViewModel/commands/save_camera_frame_command.cpp \
     ViewModel/commands/start_camera_command.cpp \
+    ViewModel/commands/update_camera_frame_command.cpp \
     ViewModel/viewmodel.cpp \
     app/app.cpp \
     ViewModel/commands/open_file_command.cpp \
@@ -41,6 +41,7 @@ HEADERS  += view/mainwindow.h \
     ViewModel/commands/close_camera_command.h \
     ViewModel/commands/save_camera_frame_command.h \
     ViewModel/commands/start_camera_command.h \
+    ViewModel/commands/update_camera_frame_command.h \
     ViewModel/viewmodel.h \
     app/app.h \
     ViewModel/commands/open_file_command.h \

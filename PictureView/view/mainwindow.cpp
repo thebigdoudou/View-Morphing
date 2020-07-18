@@ -49,7 +49,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->statusBar->hide();
     ui->menuBar->setNativeMenuBar(false);
-
+    timer = new QTimer;
+    connect(timer, SIGNAL(timeout()), this, SLOT(update_cam_frame()));//时间到后启动opencam时间
     connect(toolBar->ZoomIn,SIGNAL(clicked()),this,SLOT(ZoomIn()));
     connect(toolBar->ZoomOut,SIGNAL(clicked()),this,SLOT(ZoomOut()));
     connect(toolBar->ZoomFit,SIGNAL(clicked()),this,SLOT(ZoomFit()));
@@ -117,7 +118,10 @@ void MainWindow::update(){
     QImage image2 = (*q_image);
     ui->photo->setPixmap(QPixmap::fromImage(image2));
 }
-
+void MainWindow::update_cam_frame(){
+    set_update_camera_frame_command->exec();
+     timer->start(20);//启动计时器
+}
 void MainWindow::ZoomIn()
 {
     if(PhotoExist)
@@ -309,10 +313,13 @@ void MainWindow::resizeEvent (QResizeEvent *)
 
 void MainWindow::FullScreen()
 {
-    if(PhotoExist)
-    {
-        f1->show();
-    }
+    timer->start(20);//启动计时器
+    set_start_camera_command->exec();
+
+//    if(PhotoExist)
+//    {
+//        f1->show();
+//    }
 }
 
 
@@ -648,6 +655,9 @@ void MainWindow::close_camera_command(std::shared_ptr<Command> command){
 void MainWindow::save_camera_frame_command(std::shared_ptr<Command> command){
     set_save_camera_frame_command = command;
 }
+void MainWindow::update_camera_frame_command(std::shared_ptr<Command> command){
+    set_update_camera_frame_command = command;
+}
 void MainWindow::del_pic_command(std::shared_ptr<Command> command){
     set_del_pic_command = command;
 }
@@ -657,6 +667,7 @@ void MainWindow::flip_command(std::shared_ptr<Command> command){
 void MainWindow::rotate_command(std::shared_ptr < Command > command) {
     set_rotate_command = command;
 }
+
 
 std::shared_ptr<Notification> MainWindow::get_update_view_notification(){
     return update_view_notification;

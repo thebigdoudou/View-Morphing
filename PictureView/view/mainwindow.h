@@ -39,6 +39,7 @@ public:
     void start_camera_command(std::shared_ptr<Command>);
     void close_camera_command(std::shared_ptr<Command>);
     void save_camera_frame_command(std::shared_ptr<Command>);
+    void update_camera_frame_command(std::shared_ptr<Command>);
     void del_pic_command(std::shared_ptr<Command>);
     void flip_command(std::shared_ptr<Command>);
     void rotate_command(std::shared_ptr<Command>);
@@ -72,7 +73,7 @@ private slots:
     void Play();
     void Info();
     void Delete();
-
+    void update_cam_frame();
     void hideMirrorView();
     void hideSlideShow();
     void photoNeeded(int index);
@@ -99,6 +100,7 @@ private:
     std::shared_ptr<Command> set_start_camera_command;
     std::shared_ptr<Command> set_close_camera_command;
     std::shared_ptr<Command> set_save_camera_frame_command;
+    std::shared_ptr<Command> set_update_camera_frame_command;
     std::shared_ptr<Notification> update_view_notification;
 
     Ui::MainWindow *ui;
@@ -115,6 +117,7 @@ private:
     qreal ZoomFactor;
     bool PhotoExist;
     int PhotoIndex;
+    QTimer *timer;
 };
 
 #endif // MAINWINDOW_H

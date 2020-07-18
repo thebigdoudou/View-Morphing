@@ -107,13 +107,14 @@ void Model::StartCamera(){
     videoCapture_1.set(cv::CAP_PROP_FRAME_WIDTH, 1280);
     videoCapture_1.set(cv::CAP_PROP_FPS, 25.0);
     videoCapture_1.open(0);
-    while (1) {
-        videoCapture_1 >> CameraFrame;
-        imshow("Camera1", CameraFrame);
-        notify();
-    }
+}
+void Model::UpdateCamFrame(){
+    if (!CameraIsOn) return ;
+    videoCapture_1 >> CameraFrame;
+    notify();
 }
 void Model::CloseCamera(){
+    CameraIsOn=0;
     videoCapture_1.release();
     notify();
 }
