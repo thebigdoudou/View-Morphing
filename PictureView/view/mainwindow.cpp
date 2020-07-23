@@ -105,8 +105,7 @@ void MainWindow::dropEvent(QDropEvent *event)
                 (*PhotoMap)[(*PhotoMap).count()] = fileInfoList.takeFirst();
             }
             auto file_name = (*PhotoMap).value(0).absoluteFilePath();
-            set_open_file_command->set_parameters(std::static_pointer_cast<Parameters, PathParameters>(std::shared_ptr<PathParameters>(new PathParameters(file_name.toStdString()))));
-            set_open_file_command->exec();
+            set_open_file_command(file_name.toStdString());
             PhotoExist = true;
             PhotoIndex = 0;
             ui->statusBar->show();
@@ -120,8 +119,9 @@ void MainWindow::update(){
     ui->photo->setPixmap(QPixmap::fromImage(image2));
 }
 void MainWindow::update_cam_frame(){
-    set_update_camera_frame_command->exec();
-     timer->start(20);//启动计时器
+    int flag;
+    set_update_camera_frame_command(&flag);
+    timer->start(20);//启动计时器
 }
 void MainWindow::ZoomIn()
 {
@@ -296,9 +296,8 @@ void MainWindow::SwitchPhoto(int index)
 //    RotateFlipFlag = false;
 //    ZoomFit();
     //std::cout<<"SwitchPhoto index"<<index<<std::endl;
-    set_show_pic_command->set_parameters(std::static_pointer_cast<Parameters, IntParameters>(std::shared_ptr<IntParameters>(new IntParameters(index))));
+    set_show_pic_command(index);
     //std::cout<<"SwitchPhoto index"<<index<<std::endl;
-    set_show_pic_command->exec();
     ZoomFlag = false;
     RotateFlipFlag = false;
     ZoomFit();
@@ -313,13 +312,14 @@ void MainWindow::resizeEvent (QResizeEvent *)
 }
 
 void MainWindow::OpenCamera(){
+    int flag;
     if(CameraFlag==0){
         timer->start(20);//启动计时器
-        set_start_camera_command->exec();
+        set_start_camera_command(&flag);
         CameraFlag=1;
     }
     else{
-        set_close_camera_command->exec();
+        set_close_camera_command(&flag);
         CameraFlag=0;
         timer->stop();
     }
@@ -337,8 +337,7 @@ void MainWindow::FullScreen()
             return;
         }
         qInfo() << file_name;
-        set_save_camera_frame_command->set_parameters(std::static_pointer_cast<Parameters, PathParameters>(std::shared_ptr<PathParameters>(new PathParameters(file_name.toStdString()))));
-        set_save_camera_frame_command->exec();
+        set_save_camera_frame_command(file_name.toStdString());
     }
 }
 
@@ -347,8 +346,7 @@ void MainWindow::RotateLeft()
 {
     if(PhotoExist)
     {
-        set_rotate_command->set_parameters(std::static_pointer_cast<Parameters, IntParameters>(std::shared_ptr<IntParameters>(new IntParameters(0))));
-        set_rotate_command->exec();
+        set_rotate_command(0);
     }
 }
 
@@ -356,8 +354,7 @@ void MainWindow::RotateRight()
 {
     if(PhotoExist)
     {
-        set_rotate_command->set_parameters(std::static_pointer_cast<Parameters, IntParameters>(std::shared_ptr<IntParameters>(new IntParameters(1))));
-        set_rotate_command->exec();
+        set_rotate_command(1);
     }
 }
 
@@ -365,8 +362,7 @@ void MainWindow::FlipV()
 {
     if(PhotoExist)
     {
-        set_flip_command->set_parameters(std::static_pointer_cast<Parameters, IntParameters>(std::shared_ptr<IntParameters>(new IntParameters(0))));
-        set_flip_command->exec();
+        set_flip_command(0);
     }
 }
 
@@ -374,8 +370,7 @@ void MainWindow::FlipH()
 {
     if(PhotoExist)
     {
-        set_flip_command->set_parameters(std::static_pointer_cast<Parameters, IntParameters>(std::shared_ptr<IntParameters>(new IntParameters(1))));
-        set_flip_command->exec();
+        set_flip_command(1);
     }
 }
 
@@ -455,8 +450,7 @@ void MainWindow::Delete()
 {
     if(PhotoExist)
     {
-        set_del_pic_command->set_parameters(std::static_pointer_cast<Parameters, IntParameters>(std::shared_ptr<IntParameters>(new IntParameters(PhotoIndex))));
-        set_del_pic_command->exec();
+        set_del_pic_command(PhotoIndex);
         if(PhotoIndex==(*PhotoMap).count())
         {
             PhotoIndex=0;
@@ -494,8 +488,7 @@ void MainWindow::on_actionSave_triggered()
             return;
         }
         qInfo() << file_name;
-        set_save_file_command->set_parameters(std::static_pointer_cast<Parameters, PathParameters>(std::shared_ptr<PathParameters>(new PathParameters(file_name.toStdString()))));
-        set_save_file_command->exec();
+        set_save_file_command(file_name.toStdString());
     }
 }
 
@@ -515,8 +508,7 @@ void MainWindow::on_actionOpen_triggered()
         PhotoExist = true;
 
         auto file_name = PhotoFile.at(0);
-        set_open_file_command->set_parameters(std::static_pointer_cast<Parameters, PathParameters>(std::shared_ptr<PathParameters>(new PathParameters(file_name.toStdString()))));
-        set_open_file_command->exec();
+        set_open_file_command(file_name.toStdString());
 
         PhotoIndex = 0;
         ui->statusBar->show();
@@ -626,37 +618,37 @@ void MainWindow::set_map(std::shared_ptr<QMap<int,QFileInfo>> PhotoMap)
     this->PhotoMap = PhotoMap;
 }
 
-void MainWindow::open_file_command(std::shared_ptr<Command> command){
-    set_open_file_command = command;
+void MainWindow::open_file_command(Command&& cmd){
+    set_open_file_command = std::move(cmd);
 }
 
-void MainWindow::show_pic_command(std::shared_ptr<Command> command){
-    set_show_pic_command = command;
+void MainWindow::show_pic_command(Command&& cmd){
+    set_show_pic_command =std::move(cmd);
 }
 
-void MainWindow::save_file_command(std::shared_ptr<Command> command){
-    set_save_file_command = command;
+void MainWindow::save_file_command(Command&& cmd){
+    set_save_file_command = std::move(cmd);
 }
-void MainWindow::start_camera_command(std::shared_ptr<Command> command){
-    set_start_camera_command = command;
+void MainWindow::start_camera_command(Command&& cmd){
+    set_start_camera_command = std::move(cmd);
 }
-void MainWindow::close_camera_command(std::shared_ptr<Command> command){
-    set_close_camera_command = command;
+void MainWindow::close_camera_command(Command&& cmd){
+    set_close_camera_command = std::move(cmd);
 }
-void MainWindow::save_camera_frame_command(std::shared_ptr<Command> command){
-    set_save_camera_frame_command = command;
+void MainWindow::save_camera_frame_command(Command&& cmd){
+    set_save_camera_frame_command = std::move(cmd);
 }
-void MainWindow::update_camera_frame_command(std::shared_ptr<Command> command){
-    set_update_camera_frame_command = command;
+void MainWindow::update_camera_frame_command(Command&& cmd){
+    set_update_camera_frame_command = std::move(cmd);
 }
-void MainWindow::del_pic_command(std::shared_ptr<Command> command){
-    set_del_pic_command = command;
+void MainWindow::del_pic_command(Command&& cmd){
+    set_del_pic_command = std::move(cmd);
 }
-void MainWindow::flip_command(std::shared_ptr<Command> command){
-    set_flip_command = command;
+void MainWindow::flip_command(Command&& cmd){
+    set_flip_command = std::move(cmd);
 }
-void MainWindow::rotate_command(std::shared_ptr < Command > command) {
-    set_rotate_command = command;
+void MainWindow::rotate_command(Command&& cmd) {
+    set_rotate_command = std::move(cmd);
 }
 
 

@@ -15,17 +15,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     Model/model.cpp \
-    ViewModel/commands/close_camera_command.cpp \
-    ViewModel/commands/save_camera_frame_command.cpp \
-    ViewModel/commands/start_camera_command.cpp \
-    ViewModel/commands/update_camera_frame_command.cpp \
     ViewModel/viewmodel.cpp \
     app/app.cpp \
-    ViewModel/commands/open_file_command.cpp \
-    ViewModel/commands/rotate_command.cpp \
-    ViewModel/commands/save_file_command.cpp \
-    ViewModel/commands/show_pic_command.cpp \
-    ViewModel/commands/flip_command.cpp  \
     view/mainwindow.cpp \
     view/toolbar.cpp \
     view/photoinfo.cpp \
@@ -37,17 +28,8 @@ SOURCES += main.cpp\
 HEADERS  += view/mainwindow.h \
     Model/model.h \
     ViewModel/UpdateDisplayDataNotification.h \
-    ViewModel/commands/close_camera_command.h \
-    ViewModel/commands/save_camera_frame_command.h \
-    ViewModel/commands/start_camera_command.h \
-    ViewModel/commands/update_camera_frame_command.h \
     ViewModel/viewmodel.h \
     app/app.h \
-    ViewModel/commands/open_file_command.h \
-    ViewModel/commands/rotate_command.h \
-    ViewModel/commands/save_file_command.h \
-    ViewModel/commands/show_pic_command.h \
-    ViewModel/commands/flip_command.h  \
     common/common.h \
     view/UpdateViewNotification.h \
     view/toolbar.h \

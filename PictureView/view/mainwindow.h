@@ -5,7 +5,6 @@
 #include "about.h"
 #include "photoinfo.h"
 #include "mirrorview.h"
-#include "frame.h"
 #include "slideshow.h"
 #include <QMainWindow>
 #include <QPushButton>
@@ -33,16 +32,16 @@ public:
     void set_img(std::shared_ptr<QImage> image);
     void set_map(std::shared_ptr<QMap<int,QFileInfo>> PhotoMap);
 
-    void open_file_command(std::shared_ptr<Command>);
-    void show_pic_command(std::shared_ptr<Command>);
-    void save_file_command(std::shared_ptr<Command>);
-    void start_camera_command(std::shared_ptr<Command>);
-    void close_camera_command(std::shared_ptr<Command>);
-    void save_camera_frame_command(std::shared_ptr<Command>);
-    void update_camera_frame_command(std::shared_ptr<Command>);
-    void del_pic_command(std::shared_ptr<Command>);
-    void flip_command(std::shared_ptr<Command>);
-    void rotate_command(std::shared_ptr<Command>);
+    void open_file_command(Command&&);
+    void show_pic_command(Command&&);
+    void save_file_command(Command&&);
+    void start_camera_command(Command&&);
+    void close_camera_command(Command&&);
+    void save_camera_frame_command(Command&&);
+    void update_camera_frame_command(Command&&);
+    void del_pic_command(Command&&);
+    void flip_command(Command&&);
+    void rotate_command(Command&&);
 
     std::shared_ptr<Notification> get_update_view_notification();
 
@@ -92,16 +91,16 @@ private:
     std::shared_ptr<QImage>  q_image;
     std::shared_ptr<QMap<int,QFileInfo> > PhotoMap;
 
-    std::shared_ptr<Command> set_open_file_command;
-    std::shared_ptr<Command> set_show_pic_command;
-    std::shared_ptr<Command> set_save_file_command;
-    std::shared_ptr<Command> set_del_pic_command;
-    std::shared_ptr<Command> set_flip_command;
-    std::shared_ptr<Command> set_rotate_command;
-    std::shared_ptr<Command> set_start_camera_command;
-    std::shared_ptr<Command> set_close_camera_command;
-    std::shared_ptr<Command> set_save_camera_frame_command;
-    std::shared_ptr<Command> set_update_camera_frame_command;
+    Command set_open_file_command;
+    Command set_show_pic_command;
+    Command set_save_file_command;
+    Command set_del_pic_command;
+    Command set_flip_command;
+    Command set_rotate_command;
+    Command set_start_camera_command;
+    Command set_close_camera_command;
+    Command set_save_camera_frame_command;
+    Command set_update_camera_frame_command;
     std::shared_ptr<Notification> update_view_notification;
 
     Ui::MainWindow *ui;

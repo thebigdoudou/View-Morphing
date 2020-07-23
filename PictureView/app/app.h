@@ -2,11 +2,9 @@
 #define APP_H
 
 #include <memory>
-class ViewModel;
-class MainWindow;
-class Model;
-class Notification;
-class OpenFileCommand;
+#include <view/mainwindow.h>
+#include <ViewModel/viewmodel.h>
+#include <Model/model.h>
 
 class app
 {
