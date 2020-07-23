@@ -7,11 +7,9 @@
 using namespace std;
 
 typedef std::function<void(std::any&&)> Command;
-
 class Notification
 {
 private:
-
 
 public:
     Notification(){};

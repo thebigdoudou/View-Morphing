@@ -2,13 +2,12 @@
 #define UPDATEDISPLAYDATANOTIFICATION_H
 #include<ViewModel/viewmodel.h>
 #include<common/common.h>
-class Notification;
 
-class UpdateDisplayDataNotification:public Notification {
+class UpdateData:public Notification {
 private:
     std::shared_ptr<ViewModel> viewmodel;
 public:
-    UpdateDisplayDataNotification(std::shared_ptr<ViewModel> vm):viewmodel(vm){};
+    UpdateData(std::shared_ptr<ViewModel> vm):viewmodel(vm){};
     void exec(){
         viewmodel->notified();
     }

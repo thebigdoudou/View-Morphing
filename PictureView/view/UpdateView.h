@@ -3,11 +3,11 @@
 #include<common/common.h>
 #include<view/mainwindow.h>
 
-class UpdateViewNotification: public Notification{
+class UpdateView: public Notification{
 private:
     std::shared_ptr<MainWindow> view;
 public:
-    UpdateViewNotification(std::shared_ptr<MainWindow> v):view(v){}
+    UpdateView(std::shared_ptr<MainWindow> v):view(v){}
     void exec(){
         view->update();
     }

@@ -10,11 +10,8 @@
 #include <QCamera>
 #include <QCameraViewfinder>
 #include <QCameraImageCapture>
-class ViewModel;
-class Notification;
-class QCamera;
-class QCameraViewfinder;
-class QCameraImageCapture;
+
+
 class Model
 {
 private:

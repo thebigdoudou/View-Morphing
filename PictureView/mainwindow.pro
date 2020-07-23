@@ -27,11 +27,11 @@ SOURCES += main.cpp\
 
 HEADERS  += view/mainwindow.h \
     Model/model.h \
-    ViewModel/UpdateDisplayDataNotification.h \
+    ViewModel/UpdateData.h \
     ViewModel/viewmodel.h \
     app/app.h \
     common/common.h \
-    view/UpdateViewNotification.h \
+    view/UpdateView.h \
     view/toolbar.h \
     view/photoinfo.h \
     view/about.h \

@@ -1,13 +1,12 @@
-#include "model.h"
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include<opencv2/imgproc/imgproc.hpp>
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include "Model/model.h"
 #include <QDebug>
 #include <iostream>
+#include "Model/model.h"
 
 #include <QDir>
 //take all file in the current directory to the working space (data structure: list of images, Qmap)

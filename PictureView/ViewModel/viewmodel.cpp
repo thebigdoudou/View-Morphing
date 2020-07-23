@@ -1,13 +1,13 @@
-#include "viewmodel.h"
 #include <QImage>
+#include <QDebug>
+#include "viewmodel.h"
 #include "Model/model.h"
 #include "common/common.h"
-#include "UpdateDisplayDataNotification.h"
-#include <QDebug>
+#include "UpdateData.h"
 ViewModel::ViewModel():q_image(new QImage),q_PhotoMap(new QMap<int, QFileInfo>){
 
-    update_display_data_notification = std::static_pointer_cast<Notification, UpdateDisplayDataNotification>
-            (std::shared_ptr<UpdateDisplayDataNotification>(new UpdateDisplayDataNotification(std::shared_ptr<ViewModel>(this))));
+    update_display_data_notification = std::static_pointer_cast<Notification, UpdateData>
+            (std::shared_ptr<UpdateData>(new UpdateData(std::shared_ptr<ViewModel>(this))));
 }
 
 void ViewModel::bind(std::shared_ptr<Model> model){

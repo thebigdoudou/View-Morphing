@@ -1,6 +1,6 @@
 ﻿#include "view/mainwindow.h"
 #include "ui_mainwindow.h"
-#include "view/UpdateViewNotification.h"
+#include "view/UpdateView.h"
 #include <QPushButton>
 #include <QWidget>
 #include <QGridLayout>
@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     toolBar = new ToolBar();
-    update_view_notification = std::static_pointer_cast<Notification, UpdateViewNotification>(std::shared_ptr<UpdateViewNotification>(new UpdateViewNotification(std::shared_ptr<MainWindow>(this))));
+    update_view_notification = std::static_pointer_cast<Notification, UpdateView>(std::shared_ptr<UpdateView>(new UpdateView(std::shared_ptr<MainWindow>(this))));
     ui->statusBar->addPermanentWidget(toolBar,1);
     ui->photo->setPixmap(QPixmap(":/images/drop.png"));
     setCentralWidget(ui->photo);
