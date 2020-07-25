@@ -1,17 +1,18 @@
 ﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "common/common.h"
-#include "toolbar.h"
-#include "about.h"
-#include "photoinfo.h"
-#include "mirrorview.h"
-#include "slideshow.h"
 #include <QMainWindow>
 #include <QPushButton>
 #include <QFileInfo>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QImage>
+#include "common/common.h"
+#include "toolbar.h"
+#include "about.h"
+#include "photoinfo.h"
+#include "mirrorview.h"
+#include "slideshow.h"
+
 
 class Notification;
 
@@ -79,6 +80,7 @@ private slots:
     void hideSlideShow();
     void photoNeeded(int index);
     void OpenCamera();
+    void DetectFace();
 
     void on_actionHomePage_triggered();
     void on_actionAbout_triggered();
@@ -120,6 +122,7 @@ private:
     qreal ZoomFactor;
     bool PhotoExist;
     bool CameraFlag;
+    bool FaceFlag;
     int PhotoIndex;
     QTimer *timer;
 };

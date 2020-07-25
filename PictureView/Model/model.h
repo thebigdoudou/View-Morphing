@@ -1,7 +1,11 @@
 #ifndef MODEL_H
 #define MODEL_H
-
-#include <common/common.h>
+#include <dlib/opencv.h>
+#include <dlib/image_processing/frontal_face_detector.h>
+#include <dlib/image_processing/render_face_detections.h>
+#include <dlib/image_processing.h>
+#include <dlib/gui_widgets.h>
+#include <dlib/image_io.h>
 #include <memory>
 #include <string>
 #include <list>
@@ -10,16 +14,13 @@
 #include <QCamera>
 #include <QCameraViewfinder>
 #include <QCameraImageCapture>
-#include <dlib/image_processing/frontal_face_detector.h>
-#include <dlib/image_processing/render_face_detections.h>
-#include <dlib/image_processing.h>
-#include <dlib/gui_widgets.h>
-#include <dlib/image_io.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include<opencv2/imgproc/imgproc.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/opencv.hpp>
+#include <common/common.h>
+
 
 class Model
 {
@@ -68,29 +69,29 @@ public:
         CameraIsOn=0;
         FaceDectectIsOn=0;
         detector = dlib::get_frontal_face_detector();
-        dlib::deserialize('./shape_predictor_68_face_landmarks.dat') >> sp;
+        dlib::deserialize("C:/Users/15888/Desktop/PhotoView/Model/shape_predictor_68_face_landmarks.dat") >> sp;
     }
     void set_update_display_data_notification(std::shared_ptr<Notification> notification);
-    void open_file(std::string path);
     cv::Mat& getImg();
     QMap<int,QFileInfo>& getPhotoMap();
 //    cv::Mat& getOrigin();
     cv::Mat& getListImg(int x);
     void notify();
-    void show_pic(int ID);
-    void save_file(std::string path);
-    void save_fileID(std::string path, int ID);
-    void flip(int type);
-    void flipID(int type, int ID);
-//	void reset();
-    void rotate(int angle);
-    void rotateID(int angle, int ID);
-    void StartCamera();//开启摄像头
-    void CloseCamera(); //关闭摄像头
-    void StartFaceDetect();
-    void CloseFaceDetect();
-    void UpdateCamFrame();
-    void SaveCamPic(std::string path);
+    bool open_file(std::string path);
+    bool show_pic(int ID);
+    bool save_file(std::string path);
+    bool save_fileID(std::string path, int ID);
+    bool flip(int type);
+    bool flipID(int type, int ID);
+    bool del_pic();
+    bool rotate(int angle);
+    bool rotateID(int angle, int ID);
+    bool StartCamera();//开启摄像头
+    bool CloseCamera(); //关闭摄像头
+    bool StartFaceDetect();
+    bool CloseFaceDetect();
+    bool UpdateCamFrame();
+    bool SaveCamPic(std::string path);
 };
 
 #endif // MODEL_H

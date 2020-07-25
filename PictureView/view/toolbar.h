@@ -28,6 +28,7 @@ public:
     QPushButton *Play;
     QPushButton *Resize;
     QPushButton *camera;
+    QPushButton *FaceDetect;
     QLabel *label;
 };
 

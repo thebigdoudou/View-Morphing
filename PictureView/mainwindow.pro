@@ -1,6 +1,10 @@
 QT       += core gui
+QT       += multimedia
+QT       += multimediawidgets
+
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-QT+=multimediawidgets
+
 CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
@@ -47,20 +51,14 @@ FORMS    += view/mainwindow.ui \
 
 RESOURCES += \
     mainwindow.qrc
-win64{
+
+INCLUDEPATH += D:\OpenCV\build_dlib\include
+LIBS += D:\OpenCV\build_dlib\lib\libdlib.a
+
 INCLUDEPATH+=D:\OpenCV\opencv-3.4.9\include
              D:\OpenCV\opencv-3.4.9\include\opencv
              D:\OpenCV\opencv-3.4.9\include\opencv2
-}
-macx{
-INCLUDEPATH+=usr/local/Cellar/opencv/4.3.0_5/include/opencv4
-INCLUDEPATH+=/usr/local/include/opencv4
-}
-win64{
 LIBS += D:\OpenCV\build_opencv\lib\libopencv_*.a
-}
-macx{
-LIBS += -L/usr/local/lib -lopencv_stitching -lopencv_superres -lopencv_videostab -lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dnn -lopencv_dpm -lopencv_fuzzy -lopencv_line_descriptor -lopencv_optflow -lopencv_plot -lopencv_reg -lopencv_saliency -lopencv_stereo -lopencv_structured_light -lopencv_rgbd -lopencv_surface_matching -lopencv_tracking -lopencv_datasets -lopencv_text -lopencv_face -lopencv_xfeatures2d -lopencv_shape -lopencv_video -lopencv_ximgproc -lopencv_calib3d -lopencv_features2d -lopencv_flann -lopencv_xobjdetect -lopencv_objdetect -lopencv_ml -lopencv_xphoto -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_photo -lopencv_imgproc -lopencv_core
-}
+
 RC_ICONS = photoview.ico
 

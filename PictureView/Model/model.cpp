@@ -1,5 +1,3 @@
-
-
 #include <vector>
 #include <QDebug>
 #include <iostream>
@@ -7,7 +5,7 @@
 
 #include <QDir>
 //take all file in the current directory to the working space (data structure: list of images, Qmap)
-void Model::open_file(std::string path){
+bool Model::open_file(std::string path){
     QString qpath = QString::fromStdString(path);
     QFileInfo FileInfo(qpath);
     if(FileSuffix.contains(FileInfo.suffix(),Qt::CaseInsensitive))
@@ -26,6 +24,7 @@ void Model::open_file(std::string path){
         CurrentID=0;
     }
     notify();
+    return true;
 }
 void Model::read_img(std::string path){
     std::cout << path << std::endl;
@@ -55,10 +54,11 @@ cv::Mat& Model::getListImg(int x){
 //        tmp++;
 //    }
 //}
-void Model::show_pic(int ID){
+bool Model::show_pic(int ID){
     std::cout<<"show_pic: "<<ID<<std::endl;
     CurrentID=ID;
     notify();
+    return true;
 }
 cv::Mat& Model::getImg(){
     // TO FIX
@@ -88,29 +88,64 @@ void Model::notify(){
     update_display_data_notification->exec();
 }
 
-void Model::save_file(std::string path){
-    save_fileID(path, CurrentID);
+bool Model::save_file(std::string path){
+    return save_fileID(path, CurrentID);
 }
-void Model::save_fileID(std::string path, int ID){
+bool Model::save_fileID(std::string path, int ID){
     std::cout << path << std::endl;
     std::cout << ID << std::endl;
     cv::Mat &img=getListImg(ID);
     cv::imwrite(path, img);
+    return true;
 }
-void Model::StartCamera(){
+bool Model::del_pic(){
+
+    QFileInfo FileInfo = PhotoMap[CurrentID];
+    QFile file(FileInfo.absoluteFilePath());
+    if(file.remove())
+    {
+        PhotoMap.remove(CurrentID);
+        list<cv::Mat>::iterator range_begin = images.begin();
+        advance(range_begin,CurrentID);
+        images.erase(range_begin);
+
+        if(CurrentID==0)
+            CurrentID++;
+        else
+            CurrentID--;
+        CntNum--;
+        if(CntNum==0) return false;
+
+        QList<QFileInfo> ListInfo = PhotoMap.values();
+        PhotoMap.clear();
+        int i = 0;
+        for(i = 0;i < ListInfo.count();++i)
+        {
+           PhotoMap.insert(i,ListInfo.value(i));
+        }
+        if(CurrentID<=CntNum)
+            show_pic(CurrentID);
+    }
+    return true;
+}
+bool Model::StartCamera(){
     CameraIsOn=1;
     videoCapture_1.set(cv::CAP_PROP_FRAME_HEIGHT, 960);
     videoCapture_1.set(cv::CAP_PROP_FRAME_WIDTH, 1280);
     videoCapture_1.set(cv::CAP_PROP_FPS, 25.0);
     videoCapture_1.open(0);
+    return true;
 }
-void Model::StartFaceDetect(){
+bool Model::StartFaceDetect(){
+    std::cout<<"StartFaceDetect";
     FaceDectectIsOn=1;
     notify();
+    return true;
 }
-void Model::CloseFaceDetect(){
+bool Model::CloseFaceDetect(){
     FaceDectectIsOn=0;
     notify();
+    return true;
 }
 void line_one_face_detections(cv::Mat &img, std::vector<dlib::full_object_detection> fs)
 {
@@ -153,23 +188,25 @@ void line_one_face_detections(cv::Mat &img, std::vector<dlib::full_object_detect
         }
     }
 }
-void Model::UpdateCamFrame(){
-    if (!CameraIsOn) return ;
+bool Model::UpdateCamFrame(){
+    if (!CameraIsOn) return false ;
     videoCapture_1 >> CameraFrame;
     if (FaceDectectIsOn) {
-
+        std::cout<<"UpdateCamFrame StartFaceDetect";
         dlib::array2d<dlib::bgr_pixel> dimg;
-        dlib::assign_image(dimg, dlib::cv_image<uchar>(CameraFrame));
+        cv::Mat dst;
+        cv::cvtColor(CameraFrame, dst, CV_BGR2GRAY);
+        dlib::assign_image(dimg, dlib::cv_image<uchar>(dst));
         vector<dlib::rectangle> dets = detector(dimg);
         std::cout << "Number of faces detected: " << dets.size() << std::endl;
-        if (dets.size() == 0) {notify(); return ;}
+        if (dets.size() == 0) {notify(); return true;}
         std::vector<dlib::full_object_detection> shapes;
         int i = 0;
-        for(i = 0; i < dets.size(); i++)
+        /*for(i = 0; i < dets.size(); i++)
         {
             dlib::full_object_detection shape = sp(dimg, dets[i]); //获取指定一个区域的人脸形状
             shapes.push_back(shape);
-        }
+        }*/
         for(i=0; i<dets.size(); i++)
         {
             //画出人脸所在区域
@@ -181,42 +218,46 @@ void Model::UpdateCamFrame(){
             cv::rectangle(CameraFrame, r, cv::Scalar(0, 0, 255), 1, 1, 0);
         }
 
-        line_one_face_detections(CameraFrame, shapes);
+        //line_one_face_detections(CameraFrame, shapes);
     }
     notify();
+    return true;
 }
-void Model::CloseCamera(){
+bool Model::CloseCamera(){
     CameraIsOn=0;
     videoCapture_1.release();
     notify();
+    return true;
 }
-void Model::SaveCamPic(std::string Path){
+bool Model::SaveCamPic(std::string Path){
     cv::imwrite(Path, CameraFrame);
     notify();
+    return true;
 }
 
 //void Model::save_bmp_file(std::string path){
 //    cv::imwrite(path, image);
 //}
-void Model::rotate(int angle){
-    rotateID(angle, CurrentID);
+bool Model::rotate(int angle){
+    return rotateID(angle, CurrentID);
 }
-void Model::flip(int type){
-    std::cout<<"dfs"<<std::endl;
-    flipID(type, CurrentID);
+bool Model::flip(int type){
+    return flipID(type, CurrentID);
 }
-void Model::flipID(int type, int ID){
+bool Model::flipID(int type, int ID){
     cv::Mat &img=getListImg(ID);
     cv::flip(img, img, type);
     notify();
+    return true;
 }
 
-void Model::rotateID(int angle, int ID)
+bool Model::rotateID(int angle, int ID)
 {
     std::cout<<angle<<ID<<std::endl;
     cv::Mat &img=getListImg(ID);
     cv::transpose(img, img);
     cv::flip(img, img, angle);
     notify();
+    return true;
 }
 

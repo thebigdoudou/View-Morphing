@@ -1,10 +1,9 @@
 #ifndef APP_H
 #define APP_H
-
+#include <Model/model.h>
 #include <memory>
 #include <view/mainwindow.h>
 #include <ViewModel/viewmodel.h>
-#include <Model/model.h>
 
 class app
 {

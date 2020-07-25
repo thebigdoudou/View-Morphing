@@ -6,7 +6,7 @@
 #include<functional>
 using namespace std;
 
-typedef std::function<void(std::any&&)> Command;
+typedef std::function<bool(std::any&&)> Command;
 class Notification
 {
 private:

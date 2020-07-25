@@ -17,6 +17,7 @@
 #include <QPainter>
 #include <QFileDialog>
 #include <QTranslator>
+#include <iostream>
 
 
 QStringList FileSuffix = (QStringList() << "png" <<
@@ -64,6 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(toolBar->Play,SIGNAL(clicked()),this,SLOT(Play()));
     connect(toolBar->Delete,SIGNAL(clicked()),this,SLOT(Delete()));
     connect(toolBar->camera,SIGNAL(clicked()),this,SLOT(OpenCamera()));
+    connect(toolBar->FaceDetect,SIGNAL(clicked()),this,SLOT(DetectFace()));
 
 
     PhotoIndex = 0;
@@ -73,6 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ZoomFactor = 1.0;
     ZoomFactorFlag = true;
     CameraFlag = 0;
+    FaceFlag = 0;
 }
 
 MainWindow::~MainWindow()
@@ -291,16 +294,16 @@ void MainWindow::PhotoPrev()
 
 void MainWindow::SwitchPhoto(int index)
 {
-//    (*q_image).load((*PhotoMap).value(index).absoluteFilePath());
-//    ZoomFlag = false;
-//    RotateFlipFlag = false;
-//    ZoomFit();
-    //std::cout<<"SwitchPhoto index"<<index<<std::endl;
-    set_show_pic_command(index);
-    //std::cout<<"SwitchPhoto index"<<index<<std::endl;
-    ZoomFlag = false;
-    RotateFlipFlag = false;
-    ZoomFit();
+
+    if(set_show_pic_command(index)){
+        //std::cout<<"SwitchPhoto index"<<index<<std::endl;
+        ZoomFlag = false;
+        RotateFlipFlag = false;
+        ZoomFit();
+    }
+    else{
+        //check;
+    }
 }
 
 void MainWindow::resizeEvent (QResizeEvent *)
@@ -315,13 +318,47 @@ void MainWindow::OpenCamera(){
     int flag;
     if(CameraFlag==0){
         timer->start(20);//启动计时器
-        set_start_camera_command(&flag);
-        CameraFlag=1;
+        if(set_start_camera_command(&flag)){
+            CameraFlag=1;
+        }
+        else{
+            //check;
+        }
+
     }
     else{
-        set_close_camera_command(&flag);
-        CameraFlag=0;
+        if(set_close_camera_command(&flag)){
+            CameraFlag=0;
+        }
+        else{
+            //check
+        }
         timer->stop();
+    }
+}
+
+void MainWindow::DetectFace(){
+    if(CameraFlag)
+    {
+        int flag;
+        if(FaceFlag==0){
+
+            if(set_start_face_detect_command(&flag)){
+                FaceFlag=1;
+            }
+            else{
+                //check
+            }
+
+        }
+        else{
+            if(set_close_face_detect_command(&flag)){
+                FaceFlag=0;
+            }
+            else{
+                //check
+            }
+        }
     }
 }
 
@@ -346,7 +383,10 @@ void MainWindow::RotateLeft()
 {
     if(PhotoExist)
     {
-        set_rotate_command(0);
+        if(set_rotate_command(0));
+        else{
+            //check
+        }
     }
 }
 
@@ -354,7 +394,10 @@ void MainWindow::RotateRight()
 {
     if(PhotoExist)
     {
-        set_rotate_command(1);
+        if(set_rotate_command(1));
+        else{
+            //check
+        }
     }
 }
 
@@ -362,7 +405,10 @@ void MainWindow::FlipV()
 {
     if(PhotoExist)
     {
-        set_flip_command(0);
+        if(set_flip_command(0));
+        else{
+            //check
+        }
     }
 }
 
@@ -370,7 +416,10 @@ void MainWindow::FlipH()
 {
     if(PhotoExist)
     {
-        set_flip_command(1);
+        if(set_flip_command(1));
+        else{
+            //check
+        }
     }
 }
 
@@ -450,10 +499,14 @@ void MainWindow::Delete()
 {
     if(PhotoExist)
     {
-        set_del_pic_command(PhotoIndex);
-        if(PhotoIndex==(*PhotoMap).count())
-        {
-            PhotoIndex=0;
+        if(set_del_pic_command(PhotoIndex)){
+            if(PhotoIndex==0)
+                PhotoIndex++;
+            else
+                PhotoIndex--;
+        }
+        else{
+            //check
         }
     }
 }
@@ -488,7 +541,10 @@ void MainWindow::on_actionSave_triggered()
             return;
         }
         qInfo() << file_name;
-        set_save_file_command(file_name.toStdString());
+        if(set_save_file_command(file_name.toStdString()));
+        else{
+            //check
+        }
     }
 }
 
@@ -505,14 +561,17 @@ void MainWindow::on_actionOpen_triggered()
     {
         QStringList PhotoFile;
         PhotoFile = OpenPhoto.selectedFiles();
-        PhotoExist = true;
 
         auto file_name = PhotoFile.at(0);
-        set_open_file_command(file_name.toStdString());
-
-        PhotoIndex = 0;
-        ui->statusBar->show();
-        ZoomFit();
+        if(set_open_file_command(file_name.toStdString())){
+            PhotoExist = true;
+            PhotoIndex = 0;
+            ui->statusBar->show();
+            ZoomFit();
+        }
+        else{
+            //check;
+        }
     }
 }
 

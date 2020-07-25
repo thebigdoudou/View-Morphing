@@ -34,6 +34,7 @@ public:
     Command get_save_file_command();
     Command get_rotate_command();
     Command get_flip_command();
+    Command get_del_pic_command();
     std::shared_ptr<Notification> get_update_display_data_notification();
     std::shared_ptr<QImage> get_img();
     std::shared_ptr<QMap<int,QFileInfo> > get_map();

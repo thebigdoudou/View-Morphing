@@ -1,9 +1,8 @@
-#include <QImage>
-#include <QDebug>
-#include "viewmodel.h"
 #include "Model/model.h"
 #include "common/common.h"
 #include "UpdateData.h"
+#include <QImage>
+#include <QDebug>
 ViewModel::ViewModel():q_image(new QImage),q_PhotoMap(new QMap<int, QFileInfo>){
 
     update_display_data_notification = std::static_pointer_cast<Notification, UpdateData>
@@ -15,52 +14,52 @@ void ViewModel::bind(std::shared_ptr<Model> model){
 }
 
 Command ViewModel::get_save_file_command(){
-    return [this](std::any t)->void {
+    return [this](std::any t)->bool {
         string s = std::any_cast<string>(t);
-        this->model->save_file(s);
+        return this->model->save_file(s);
     };
 }
 Command ViewModel::get_update_camera_frame_command(){
-    return [this](std::any t)->void {
-        this->model->UpdateCamFrame();
+    return [this](std::any t)->bool {
+        return this->model->UpdateCamFrame();
     };
 }
 Command ViewModel::get_start_camera_command(){
-    return [this](std::any t)->void{
-        this->model->StartCamera();
+    return [this](std::any t)->bool{
+        return this->model->StartCamera();
     };
 }
 Command ViewModel::get_close_camera_command(){
-    return [this](std::any t)->void{
-        this->model->CloseCamera();
+    return [this](std::any t)->bool{
+        return this->model->CloseCamera();
     };
 }
 Command ViewModel::get_start_face_detect_command(){
-    return [this](std::any t)->void{
-        this->model->StartFaceDetect();
+    return [this](std::any t)->bool{
+        return this->model->StartFaceDetect();
     };
 }
 Command ViewModel::get_close_face_detect_command(){
-    return [this](std::any t)->void{
-        this->model->CloseFaceDetect();
+    return [this](std::any t)->bool{
+        return this->model->CloseFaceDetect();
     };
 }
 Command ViewModel::get_save_camera_frame_command(){
-    return [this](std::any t)->void {
+    return [this](std::any t)->bool {
         string s = std::any_cast<string>(t);
-        this->model->SaveCamPic(s);
+        return this->model->SaveCamPic(s);
     };
 }
 Command ViewModel::get_open_file_command(){
-    return [this](std::any t)->void {
+    return [this](std::any t)->bool {
         string s = std::any_cast<string>(t);
-        this->model->open_file(s);
+        return this->model->open_file(s);
     };
 }
 Command ViewModel::get_show_pic_command(){
-    return [this](std::any t)->void{
+    return [this](std::any t)->bool{
         int g=std::any_cast<int>(t);
-        this->model->show_pic(g);
+        return this->model->show_pic(g);
     };
 }
 
@@ -68,15 +67,22 @@ std::shared_ptr<Notification> ViewModel::get_update_display_data_notification(){
     return update_display_data_notification;
 }
 Command ViewModel::get_rotate_command(){
-    return [this](std::any t)->void{
+    return [this](std::any t)->bool{
         int angle=std::any_cast<int>(t);
-        this->model->rotate(angle);
+        return this->model->rotate(angle);
     };
 }
 Command ViewModel::get_flip_command(){
-    return [this](std::any t)->void{
+    return [this](std::any t)->bool{
         int type=std::any_cast<int>(t);
-        this->model->flip(type);
+        return this->model->flip(type);
+    };
+}
+
+Command ViewModel::get_del_pic_command(){
+    return [this](std::any t)->bool{
+        int type=std::any_cast<int>(t);
+        return this->model->del_pic();
     };
 }
 

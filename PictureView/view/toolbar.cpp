@@ -19,6 +19,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     Play = new QPushButton(this);
     Info = new QPushButton(this);
     camera = new QPushButton(this);
+    FaceDetect = new QPushButton(this);
 
     ZoomIn->setObjectName("ZoomIn");
     ZoomOut->setObjectName("ZoomOut");
@@ -34,6 +35,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     FlipH->setObjectName("FlipH");
     Play->setObjectName("Play");
     camera->setObjectName("Carema");
+    FaceDetect->setObjectName("FaceDetect");
     //Resize = new QPushButton(this);
 
     ZoomIn->setIcon(QIcon(":/images/zoomin.png"));
@@ -50,6 +52,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     FlipH->setIcon(QIcon(":/images/fliphorizontal.png"));
     Play->setIcon(QIcon(":/images/play.png"));
     camera->setIcon(QIcon(":/images/camera.png"));
+    FaceDetect->setIcon(QIcon(":/images/face.png"));
     //Resize->setIcon(QIcon(":/images/resize.png"));
 
     ZoomIn->setToolTip(tr("Zoom In"));
@@ -66,6 +69,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     FlipH->setToolTip(tr("Flip Horizontal"));
     Play->setToolTip(tr("Play"));
     camera->setToolTip(tr("Camera"));
+    FaceDetect->setToolTip(tr("FaceDetect"));
 
     label = new QLabel;
     label->setObjectName("label");
@@ -92,6 +96,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     mainLayout->addWidget(Delete,4);
     mainLayout->addWidget(camera,4);
     mainLayout->addWidget(FullScreen,4);
+    mainLayout->addWidget(FaceDetect,4);
     mainLayout->addStretch(28);
     mainLayout->setContentsMargins(0,0,0,0);
     mainLayout->setSpacing(3);
