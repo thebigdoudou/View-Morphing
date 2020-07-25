@@ -635,6 +635,12 @@ void MainWindow::start_camera_command(Command&& cmd){
 void MainWindow::close_camera_command(Command&& cmd){
     set_close_camera_command = std::move(cmd);
 }
+void MainWindow::start_face_detect_command(Command&& cmd){
+    set_start_face_detect_command = std::move(cmd);
+}
+void MainWindow::close_face_detect_command(Command&& cmd){
+    set_close_face_detect_command = std::move(cmd);
+}
 void MainWindow::save_camera_frame_command(Command&& cmd){
     set_save_camera_frame_command = std::move(cmd);
 }

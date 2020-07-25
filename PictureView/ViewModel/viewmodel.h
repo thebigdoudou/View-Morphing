@@ -26,6 +26,8 @@ public:
     Command get_open_file_command();
     Command get_show_pic_command();
     Command get_start_camera_command();
+    Command get_start_face_detect_command();
+    Command get_close_face_detect_command();
     Command get_close_camera_command();
     Command get_save_camera_frame_command();
     Command get_update_camera_frame_command();

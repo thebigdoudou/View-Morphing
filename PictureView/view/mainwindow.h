@@ -37,6 +37,8 @@ public:
     void save_file_command(Command&&);
     void start_camera_command(Command&&);
     void close_camera_command(Command&&);
+    void start_face_detect_command(Command&&);
+    void close_face_detect_command(Command&&);
     void save_camera_frame_command(Command&&);
     void update_camera_frame_command(Command&&);
     void del_pic_command(Command&&);
@@ -99,6 +101,8 @@ private:
     Command set_rotate_command;
     Command set_start_camera_command;
     Command set_close_camera_command;
+    Command set_start_face_detect_command;
+    Command set_close_face_detect_command;
     Command set_save_camera_frame_command;
     Command set_update_camera_frame_command;
     std::shared_ptr<Notification> update_view_notification;

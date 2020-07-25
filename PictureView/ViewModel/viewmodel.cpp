@@ -35,6 +35,16 @@ Command ViewModel::get_close_camera_command(){
         this->model->CloseCamera();
     };
 }
+Command ViewModel::get_start_face_detect_command(){
+    return [this](std::any t)->void{
+        this->model->StartFaceDetect();
+    };
+}
+Command ViewModel::get_close_face_detect_command(){
+    return [this](std::any t)->void{
+        this->model->CloseFaceDetect();
+    };
+}
 Command ViewModel::get_save_camera_frame_command(){
     return [this](std::any t)->void {
         string s = std::any_cast<string>(t);
