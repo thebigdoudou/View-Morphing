@@ -33,7 +33,6 @@ void Model::read_img(std::string path){
     if(img.empty()){
         qInfo() << "image file read faile";
     }else{
-        //CurrentID=CntNum;
         CntNum++;
         images.push_back(img);
 
@@ -47,13 +46,7 @@ cv::Mat& Model::getListImg(int x){
         tmp++;
     }
 }
-//void Model::setListImg(int ID, cv::Mat &img){
-//    static int tmp=0;
-//    for (std::list<cv::Mat>::iterator it = images.begin(); it != images.end(); ++it){
-//        if (tmp==x) *it
-//        tmp++;
-//    }
-//}
+
 bool Model::show_pic(int ID){
     std::cout<<"show_pic: "<<ID<<std::endl;
     CurrentID=ID;
@@ -61,7 +54,6 @@ bool Model::show_pic(int ID){
     return true;
 }
 cv::Mat& Model::getImg(){
-    // TO FIX
     if (CameraIsOn) return CameraFrame;
     else
     return getListImg(CurrentID);
@@ -70,15 +62,6 @@ QMap<int,QFileInfo>& Model::getPhotoMap(){
     return PhotoMap;
 }
 
-
-
-//cv::Mat& Model::getOrigin(){
-//    return originImg;
-//}
-
-//void Model::bind(std::shared_ptr<ViewModel> viewmodel){
-//    this->viewmodel = viewmodel;
-//}
 
 void Model::set_update_display_data_notification(std::shared_ptr<Notification> notification){
     this->update_display_data_notification = notification;
@@ -202,11 +185,11 @@ bool Model::UpdateCamFrame(){
         if (dets.size() == 0) {notify(); return true;}
         std::vector<dlib::full_object_detection> shapes;
         int i = 0;
-        /*for(i = 0; i < dets.size(); i++)
+        for(i = 0; i < dets.size(); i++)
         {
             dlib::full_object_detection shape = sp(dimg, dets[i]); //获取指定一个区域的人脸形状
             shapes.push_back(shape);
-        }*/
+        }
         for(i=0; i<dets.size(); i++)
         {
             //画出人脸所在区域
@@ -218,7 +201,7 @@ bool Model::UpdateCamFrame(){
             cv::rectangle(CameraFrame, r, cv::Scalar(0, 0, 255), 1, 1, 0);
         }
 
-        //line_one_face_detections(CameraFrame, shapes);
+        line_one_face_detections(CameraFrame, shapes);
     }
     notify();
     return true;
@@ -235,9 +218,6 @@ bool Model::SaveCamPic(std::string Path){
     return true;
 }
 
-//void Model::save_bmp_file(std::string path){
-//    cv::imwrite(path, image);
-//}
 bool Model::rotate(int angle){
     return rotateID(angle, CurrentID);
 }
